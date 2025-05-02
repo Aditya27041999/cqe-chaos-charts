@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  name: argowf-chaos-node-cpu-hog
+  name: argowf-chaos-cqe-node-cpu-hog
   namespace: litmus
   labels:
     subject: "{{workflow.parameters.context}}"
@@ -16,7 +16,7 @@ spec:
       - name: adminModeNamespace
         value: "litmus"
       - name: context
-        value: "node-cpu-hog_infra"
+        value: "cqe-node-cpu-hog_infra"
   templates:
     - name: argowf-chaos
       steps:
@@ -31,16 +31,16 @@ spec:
       inputs:
         artifacts:
           - name: install-chaos-faults
-            path: /tmp/node-cpu-hog.yaml
+            path: /tmp/cqe-node-cpu-hog.yaml
             raw:
               data: |
                 apiVersion: litmuschaos.io/v1alpha1
                 description:
                   message: |
-                    Give a cpu spike on a node belonging to a deployment
+                    Give a cpu spike on a node belonging to a deployment (CQE custom version)
                 kind: ChaosExperiment
                 metadata:
-                  name: node-cpu-hog
+                  name: cqe-node-cpu-hog
                 spec:
                   definition:
                     scope: Cluster
@@ -76,7 +76,7 @@ spec:
                     imagePullPolicy: Always
                     args:
                     - -c
-                    - ./experiments -name node-cpu-hog
+                    - ./experiments -name cqe-node-cpu-hog
                     command:
                     - /bin/bash
                     env:
@@ -98,13 +98,13 @@ spec:
                       value: 'litmuschaos.docker.scarf.sh/litmuschaos/go-runner:latest'
 
                     labels:
-                      name: node-cpu-hog
+                      name: cqe-node-cpu-hog
       container:
         image: litmuschaos/k8s:latest
         command: [sh, -c]
         args:
           [
-            "kubectl apply -f /tmp/node-cpu-hog.yaml -n {{workflow.parameters.adminModeNamespace}}",
+            "kubectl apply -f /tmp/cqe-node-cpu-hog.yaml -n {{workflow.parameters.adminModeNamespace}}",
           ]
 
     - name: run-chaos
@@ -117,7 +117,7 @@ spec:
                 apiVersion: litmuschaos.io/v1alpha1
                 kind: ChaosEngine
                 metadata:
-                  name: kube-proxy-node-cpu-hog-chaos
+                  name: kube-proxy-cqe-node-cpu-hog-chaos
                   namespace: "{{workflow.parameters.adminModeNamespace}}"
                   labels:
                     context: "{{workflow.parameters.context}}"
@@ -127,7 +127,7 @@ spec:
                   engineState: 'active'
                   chaosServiceAccount: litmus-admin
                   experiments:
-                    - name: node-cpu-hog
+                    - name: cqe-node-cpu-hog
                       spec:
                         components:
                           env:
@@ -146,5 +146,5 @@ spec:
         command: [sh, -c]
         args:
           [
-            "kubectl delete chaosengine kube-proxy-node-cpu-hog-chaos -n {{workflow.parameters.adminModeNamespace}}",
+            "kubectl delete chaosengine kube-proxy-cqe-node-cpu-hog-chaos -n {{workflow.parameters.adminModeNamespace}}",
           ]
