@@ -20,7 +20,7 @@ spec:
         - name: adminModeNamespace
           value: "litmus"
         - name: context
-          value: "cqe-node-cpu-hog_infra"
+          value: "cqe-node-cpu-hog"
     templates:
       - name: argowf-chaos
         steps:
