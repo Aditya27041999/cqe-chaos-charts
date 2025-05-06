@@ -4,7 +4,7 @@ metadata:
   name: argo-chaos-cqe-node-cpu-cron-wf
   namespace: litmus
   labels:
-    subject: "{{workflow.parameters.context}}"
+    subject: "cqe-node-cpu-hog"
 spec:
   schedule: "0 * * * *"
   concurrencyPolicy: "Forbid"
@@ -124,7 +124,7 @@ spec:
                     name: kube-proxy-cqe-node-cpu-hog-chaos
                     namespace: "{{workflow.parameters.adminModeNamespace}}"
                     labels:
-                      context: "{{workflow.parameters.context}}"
+                      context: "cqe-node-cpu-hog"
                     annotations: {}
                   spec:
                     jobCleanUpPolicy: retain

@@ -4,7 +4,7 @@ metadata:
   name: argowf-chaos-cqe-node-cpu-hog
   namespace: litmus
   labels:
-    subject: "{{workflow.parameters.context}}"
+    subject: "cqe-node-cpu-hog"
 spec:
   entrypoint: argowf-chaos
   serviceAccountName: argo-chaos
@@ -120,7 +120,7 @@ spec:
                   name: kube-proxy-cqe-node-cpu-hog-chaos
                   namespace: "{{workflow.parameters.adminModeNamespace}}"
                   labels:
-                    context: "{{workflow.parameters.context}}"
+                    context: "cqe-node-cpu-hog"
                   annotations: {}
                 spec:
                   jobCleanUpPolicy: retain
