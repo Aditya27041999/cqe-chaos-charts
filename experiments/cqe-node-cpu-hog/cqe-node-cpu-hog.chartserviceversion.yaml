@@ -17,7 +17,7 @@ spec:
       description: CQE Node CPU hog injects a CPU spike on a node where the application pod is scheduled.
   keywords:
     - Kubernetes
-    - CQE
+    - cqe-test-service
   platforms:
     - GKE
     - EKS
