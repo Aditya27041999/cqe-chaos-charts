@@ -127,7 +127,7 @@ spec:
                   engineState: 'active'
                   chaosServiceAccount: litmus-admin
                   experiments:
-                    - name: cqe-node-cpu-hog
+                    - name: node-cpu-hog
                       spec:
                         components:
                           env:
