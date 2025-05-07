@@ -129,6 +129,21 @@ spec:
                   experiments:
                     - name: cqe-node-cpu-hog
                       spec:
+                        probe:
+                        - name: "cqe-test-probe"
+                          type: "httpProbe"
+                          httpProbe/inputs:
+                            url: "https://cqe-test-service-crt-crtkub2625.io.coupadev.com"
+                            responseTimeout: 100
+                            method:
+                              get:
+                                criteria: "=="
+                                responseCode: "200"
+                          mode: "Continuous"
+                          runProperties:
+                            probeTimeout: 5s
+                            interval: 100ms
+                            attempt: 10
                         components:
                           env:
                             - name: NODE_CPU_CORE
