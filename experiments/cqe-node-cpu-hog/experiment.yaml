@@ -121,26 +121,7 @@ spec:
                   namespace: "{{workflow.parameters.adminModeNamespace}}"
                   labels:
                     context: "cqe-node-cpu-hog"
-                  annotations:
-                    probeRef: '[
-                              {
-                                    "name": "cqe-test-probe",
-                                    "type": "httpProbe",
-                                    "httpProbe/inputs": {
-                                      "url": "https://cqe-test-service-crt-crtkub2625.io.coupadev.com",
-                                      "method": {
-                                        "get": {
-                                          "criteria": "==",
-                                          "responseCode": "200"
-                                        }
-                                      },
-                                      "retry": 3,
-                                      "timeout": 2,
-                                      "interval": 5
-                                    },
-                                    "mode": "Continuous"
-                                  }
-                                ]'
+                  annotations: {}
                 spec:
                   jobCleanUpPolicy: retain
                   engineState: 'active'
@@ -148,21 +129,6 @@ spec:
                   experiments:
                     - name: cqe-node-cpu-hog
                       spec:
-                        # probe:
-                        # - name: "cqe-test-probe"
-                        #   type: "httpProbe"
-                        #   httpProbe/inputs:
-                        #     url: "https://cqe-test-service-crt-crtkub2625.io.coupadev.com"
-                        #     responseTimeout: 100
-                        #     method:
-                        #       get:
-                        #         criteria: "=="
-                        #         responseCode: "200"
-                        #   mode: "Continuous"
-                        #   runProperties:
-                        #     probeTimeout: 5s
-                        #     interval: 100ms
-                        #     attempt: 10
                         components:
                           env:
                             - name: NODE_CPU_CORE
