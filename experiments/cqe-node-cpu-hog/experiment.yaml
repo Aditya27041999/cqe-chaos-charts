@@ -117,11 +117,14 @@ spec:
                 apiVersion: litmuschaos.io/v1alpha1
                 kind: ChaosEngine
                 metadata:
-                  name: kube-proxy-cqe-node-cpu-hog-chaos
+                  # name: kube-proxy-cqe-node-cpu-hog-chaos
                   namespace: "{{workflow.parameters.adminModeNamespace}}"
                   labels:
-                    context: "cqe-node-cpu-hog"
+                    workflow_run_id: "{{ workflow.uid }}"
+                    workflow_name: "{{ metadata.name }}"
+                    context: "{{workflow.parameters.context}}"
                   annotations: {}
+                  generateName: run-chaos
                 spec:
                   jobCleanUpPolicy: retain
                   engineState: 'active'
