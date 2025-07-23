@@ -121,30 +121,14 @@ spec:
                   apiVersion: litmuschaos.io/v1alpha1
                   kind: ChaosEngine
                   metadata:
-                    name: kube-proxy-cqe-node-cpu-hog-chaos
+                    # name: kube-proxy-cqe-node-cpu-hog-chaos
                     namespace: "{{workflow.parameters.adminModeNamespace}}"
                     labels:
-                      context: "cqe-node-cpu-hog"
-                    annotations: 
-                      probeRef: '[
-                              {
-                                    "name": "cqe-test-probe",
-                                    "type": "httpProbe",
-                                    "httpProbe/inputs": {
-                                      "url": "https://cqe-test-service-crt-crtkub2625.io.coupadev.com",
-                                      "method": {
-                                        "get": {
-                                          "criteria": "==",
-                                          "responseCode": "200"
-                                        }
-                                      },
-                                      "retry": 3,
-                                      "timeout": 2,
-                                      "interval": 5
-                                    },
-                                    "mode": "Continuous"
-                                  }
-                                ]'
+                      workflow_run_id: "{{ workflow.uid }}"
+                      workflow_name: "{{ metadata.name }}"
+                      context: "{{workflow.parameters.context}}"
+                    annotations: {}
+                    generateName: run-chaos
                   spec:
                     jobCleanUpPolicy: retain
                     engineState: 'active'
