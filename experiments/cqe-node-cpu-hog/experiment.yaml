@@ -3,8 +3,6 @@ kind: Workflow
 metadata:
   name: argowf-chaos-cqe-node-cpu-hog
   namespace: litmus
-  labels:
-    subject: "cqe-node-cpu-hog"
 spec:
   entrypoint: argowf-chaos
   serviceAccountName: argo-chaos
@@ -14,7 +12,7 @@ spec:
   arguments:
     parameters:
       - name: adminModeNamespace
-        value: "litmus"
+        value: "{{metadata.namespace}}"
       - name: context
         value: "cqe-node-cpu-hog"
   templates:
