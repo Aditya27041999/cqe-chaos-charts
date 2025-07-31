@@ -12,7 +12,7 @@ spec:
   arguments:
     parameters:
       - name: adminModeNamespace
-        value: "{{metadata.namespace}}"
+        value: "{{ metadata.namespace }}"
       - name: context
         value: "cqe-node-cpu-hog"
   templates:
