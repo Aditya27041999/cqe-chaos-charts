@@ -119,7 +119,7 @@ spec:
                   namespace: "{{workflow.parameters.adminModeNamespace}}"
                   labels:
                     workflow_run_id: "{{ workflow.uid }}"
-                    workflow_name: "{{ metadata.name }}"
+                    workflow_name: "{{ workflow.name }}"
                     context: "{{workflow.parameters.context}}"
                   annotations: {}
                   generateName: run-chaos
