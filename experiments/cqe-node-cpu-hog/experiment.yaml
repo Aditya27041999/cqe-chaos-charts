@@ -6,6 +6,8 @@ metadata:
 spec:
   entrypoint: argowf-chaos
   serviceAccountName: argo-chaos
+  podGC:
+    strategy: OnWorkflowCompletion
   securityContext:
     runAsUser: 1000
     runAsNonRoot: true
