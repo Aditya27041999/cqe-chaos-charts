@@ -16,7 +16,7 @@ spec:
     arguments:
       parameters:
         - name: adminModeNamespace
-          value: "litmus"
+          value: "{{ workflow.namespace }}"
         - name: context
           value: "cqe-node-cpu-hog"
     templates:
