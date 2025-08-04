@@ -147,5 +147,6 @@ spec:
         command: [sh, -c]
         args:
           [
-            "kubectl delete chaosengine kube-proxy-cqe-node-cpu-hog-chaos -n {{workflow.parameters.adminModeNamespace}}",
+            "kubectl delete chaosengine -l workflow_run_id={{workflow.uid}} -n {{workflow.parameters.adminModeNamespace}}",
+            "kubectl delete pods -n {{workflow.parameters.adminModeNamespace}} -l workflows.argoproj.io/workflow"
           ]
